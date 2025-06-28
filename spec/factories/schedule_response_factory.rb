@@ -10,6 +10,9 @@ FactoryBot.define do
           "number": 1,
           "summary": "A young boy named Kirby discovers his amazing artistic abilities.",
           "runtime": 30,
+          "airdate": "2014-10-20",
+          "airtime": "19:30",
+          "airstamp": "2014-10-20T23:30:00+00:00",
           "image": {
             "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg",
             "original": "https://static.tvmaze.com/uploads/images/original_untouched/1/2668.jpg"
@@ -39,6 +42,9 @@ FactoryBot.define do
           "number": 1,
           "summary": "The Doctor's greatest adventure begins in this special anniversary episode.",
           "runtime": 75,
+          "airdate": "2013-11-23",
+          "airtime": "20:00",
+          "airstamp": "2013-11-23T20:00:00+00:00",
           "image": {
             "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/2/5465.jpg",
             "original": "https://static.tvmaze.com/uploads/images/original_untouched/2/5465.jpg"
@@ -68,6 +74,9 @@ FactoryBot.define do
           "number": 12,
           "summary": "Carrie and her team execute a dangerous operation in Berlin.",
           "runtime": 55,
+          "airdate": "2013-12-15",
+          "airtime": "21:00",
+          "airstamp": "2013-12-16T02:00:00+00:00",
           "image": {
             "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/3/7854.jpg",
             "original": "https://static.tvmaze.com/uploads/images/original_untouched/3/7854.jpg"
