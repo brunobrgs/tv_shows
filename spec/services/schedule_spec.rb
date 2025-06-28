@@ -17,4 +17,9 @@ RSpec.describe Schedule do
     expect { described_class.upsert! }.to change(Network, :count).by(3)
     expect { described_class.upsert! }.to change(Network, :count).by(0)
   end
+
+  it "creates shows that are not yet persisted" do
+    expect { described_class.upsert! }.to change(Show, :count).by(3)
+    expect { described_class.upsert! }.to change(Show, :count).by(0)
+  end
 end

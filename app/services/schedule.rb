@@ -1,8 +1,9 @@
 class Schedule
   include CountryProcessing
   include NetworkProcessing
+  include ShowProcessing
 
-  attr_reader :countries_data, :networks_data
+  attr_reader :countries_data, :networks_data, :shows_data
 
   def self.upsert!
     new.upsert!
@@ -11,6 +12,7 @@ class Schedule
   def initialize
     @countries_data = {}
     @networks_data = {}
+    @shows_data = {}
   end
 
   def upsert!
@@ -32,6 +34,7 @@ class Schedule
 
       process_country(show)
       process_network(show["network"])
+      process_show(show)
     end
   end
 end
