@@ -1,24 +1,35 @@
-# README
+## Requirements
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby 3.1.2
+* PostgreSQL
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+1. Install the gems
 
-* System dependencies
+```
+bundle install
+```
 
-* Configuration
+2. Create and setup the database
 
-* Database creation
+```
+rails db:create
+rails db:migrate
+```
 
-* Database initialization
+3. Run tests
 
-* How to run the test suite
+```
+rspec
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## TODO
 
-* Deployment instructions
-
-* ...
+- Store the optional `webChannel` from `tvmaze` response
+- Treat rate limiting: API calls are rate limited to allow at least 20 calls every 10 seconds per IP address.
+- Review indexes & include a short paragraph on why you chose them.
+- Provide at least 3 sample analytical queries (CTE/window or aggregate).
+- Deployment plan
+- Update Readme (Trade-off notes + decisions)
+- Schema diagram (ASCII or PNG)
