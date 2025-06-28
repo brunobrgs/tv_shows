@@ -9,7 +9,12 @@ RSpec.describe Schedule do
   end
 
   it "create countries that are not yet persisted" do
-    expect { described_class.upsert }.to change(Country, :count).by(2)
-    expect { described_class.upsert }.to change(Country, :count).by(0)
+    expect { described_class.upsert! }.to change(Country, :count).by(2)
+    expect { described_class.upsert! }.to change(Country, :count).by(0)
+  end
+
+  it "creates networks that are not yet persisted" do
+    expect { described_class.upsert! }.to change(Network, :count).by(3)
+    expect { described_class.upsert! }.to change(Network, :count).by(0)
   end
 end
