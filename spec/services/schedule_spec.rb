@@ -13,13 +13,37 @@ RSpec.describe Schedule do
     expect { described_class.upsert! }.to change(Country, :count).by(0)
   end
 
+  it "updates countries that are already persisted" do
+    create(:country, code: 'US', name: "Wrong name")
+
+    described_class.upsert!
+
+    expect(Country.find_by(code: 'US').name).to eq("United States")
+  end
+
   it "creates networks that are not yet persisted" do
     expect { described_class.upsert! }.to change(Network, :count).by(3)
     expect { described_class.upsert! }.to change(Network, :count).by(0)
   end
 
+  it "updates networks that are already persisted" do
+    create(:network, id: 1, name: "Wrong name")
+
+    described_class.upsert!
+
+    expect(Network.find_by(id: 1).name).to eq("Disney XD")
+  end
+
   it "creates shows that are not yet persisted" do
     expect { described_class.upsert! }.to change(Show, :count).by(3)
     expect { described_class.upsert! }.to change(Show, :count).by(0)
+  end
+
+  it "updates shows that are already persisted" do
+    create(:show, id: 1, name: "Wrong name")
+
+    described_class.upsert!
+
+    expect(Show.find_by(id: 1).name).to eq("Kirby Buckets")
   end
 end

@@ -6,10 +6,10 @@ FactoryBot.define do
         {
           "id": 1,
           "show": {
-            "id": 250,
+            "id": 1,
             "name": "Kirby Buckets",
             "network": {
-              "id": 25,
+              "id": 1,
               "name": "Disney XD",
               "country": {
                 "name": "United States",
@@ -22,10 +22,10 @@ FactoryBot.define do
         {
           "id": 2,
           "show": {
-            "id": 251,
+            "id": 2,
             "name": "Doctor Who",
             "network": {
-              "id": 12,
+              "id": 2,
               "name": "BBC One",
               "country": {
                 "name": "United Kingdom",
@@ -38,10 +38,10 @@ FactoryBot.define do
         {
           "id": 3,
           "show": {
-            "id": 252,
+            "id": 3,
             "name": "Homeland",
             "network": {
-              "id": 27,
+              "id": 3,
               "name": "Showtime",
               "country": {
                 "name": "United States",
