@@ -19,9 +19,10 @@ class Schedule
 
   def upsert!
     start_date = Date.today
-    end_date = Date.today
+    end_date = 90.days.from_now
 
     (start_date..end_date).each do |date|
+      Rails.logger.info "Processing schedule for #{date}"
       raw_data = TvMaze.schedule_for(date)
       process_raw_data(raw_data)
     end
@@ -33,10 +34,12 @@ class Schedule
     raw_data.each do |data|
       show = data["show"]
 
-      process_country(show)
-      process_network(show["network"])
-      process_show(show)
-      process_episode(data)
+      ActiveRecord::Base.transaction do
+        process_country(show)
+        process_network(show["network"])
+        process_show(show)
+        process_episode(data)
+      end
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_28_203956) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_28_210652) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_28_203956) do
   create_table "episodes", force: :cascade do |t|
     t.string "name", null: false
     t.integer "season", null: false
-    t.integer "number", null: false
+    t.integer "number"
     t.text "summary"
     t.integer "runtime"
     t.string "image_original"
