@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_28_175335) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_28_184735) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,23 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_28_175335) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_countries_on_code", unique: true
+  end
+
+  create_table "episodes", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "season", null: false
+    t.integer "number", null: false
+    t.text "summary"
+    t.integer "runtime"
+    t.string "image_original"
+    t.string "image_medium"
+    t.string "url", null: false
+    t.decimal "rating_average", precision: 3, scale: 1
+    t.bigint "show_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["show_id", "season", "number"], name: "index_episodes_on_show_id_and_season_and_number", unique: true
+    t.index ["show_id"], name: "index_episodes_on_show_id"
   end
 
   create_table "networks", force: :cascade do |t|
@@ -54,6 +71,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_28_175335) do
     t.index ["network_id"], name: "index_shows_on_network_id"
   end
 
+  add_foreign_key "episodes", "shows"
   add_foreign_key "networks", "countries"
   add_foreign_key "shows", "networks"
 end

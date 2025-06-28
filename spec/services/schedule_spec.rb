@@ -46,4 +46,17 @@ RSpec.describe Schedule do
 
     expect(Show.find_by(id: 1).name).to eq("Kirby Buckets")
   end
+
+  it "creates episodes that are not yet persisted" do
+    expect { described_class.upsert! }.to change(Episode, :count).by(3)
+    expect { described_class.upsert! }.to change(Episode, :count).by(0)
+  end
+
+  it "updates episodes that are already persisted" do
+    create(:episode, id: 1, name: "Wrong name")
+
+    described_class.upsert!
+
+    expect(Episode.find_by(id: 1).name).to eq("Pilot")
+  end
 end

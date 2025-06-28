@@ -2,8 +2,9 @@ class Schedule
   include CountryProcessing
   include NetworkProcessing
   include ShowProcessing
+  include EpisodeProcessing
 
-  attr_reader :countries_data, :networks_data, :shows_data
+  attr_reader :countries_data, :networks_data, :shows_data, :episodes_data
 
   def self.upsert!
     new.upsert!
@@ -13,6 +14,7 @@ class Schedule
     @countries_data = {}
     @networks_data = {}
     @shows_data = {}
+    @episodes_data = {}
   end
 
   def upsert!
@@ -30,11 +32,11 @@ class Schedule
   def process_raw_data(raw_data)
     raw_data.each do |data|
       show = data["show"]
-      next unless show
 
       process_country(show)
       process_network(show["network"])
       process_show(show)
+      process_episode(data)
     end
   end
 end
