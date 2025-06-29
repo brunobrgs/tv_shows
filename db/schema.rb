@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_28_210652) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_29_144048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,7 +40,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_28_210652) do
     t.string "airtime", null: false
     t.datetime "airstamp", null: false
     t.index ["airstamp"], name: "index_episodes_on_airstamp"
-    t.index ["show_id", "season", "number"], name: "index_episodes_on_show_id_and_season_and_number", unique: true
     t.index ["show_id"], name: "index_episodes_on_show_id"
   end
 

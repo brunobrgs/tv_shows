@@ -33,3 +33,5 @@ rspec
 - Deployment plan
 - Update Readme (Trade-off notes + decisions)
 - Schema diagram (ASCII or PNG)
+- Use Redis for cache
+- Create a presenter for the episode Json
