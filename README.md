@@ -24,17 +24,28 @@ rails db:migrate
 rspec
 ```
 
-## TODO
+## DB Indexes
 
-- Store the optional `webChannel` from `tvmaze` response
-- Treat rate limiting: API calls are rate limited to allow at least 20 calls every 10 seconds per IP address.
-- Review indexes & include a short paragraph on why you chose them.
+Apart from ID/FK indexes, it was added indexes related to the attributes that 
+are used in the endpoint filters.
+- Episodes (airstamp)
+- Networks (name)
+- Countries (code)
+
+## DB schema
+
+![Database Schema](schema.png)
+
+## Final considerations / TODO
+
+- `TvshowsController` would benefit of moving things to separate files, like the filter queries
+- Store the optional `webChannel` from `tvmaze` response (there are shows without a network)
+- Treat rate limiting: API calls are rate limited to allow at least 20 calls every 10 seconds per IP address. (didn't happen anytime during development)
 - Provide at least 3 sample analytical queries (CTE/window or aggregate).
 - Deployment plan
-- Update Readme (Trade-off notes + decisions)
-- Schema diagram (ASCII or PNG)
 - Use Redis for cache
 - Create a presenter for the episode Json
 - `Schedule.upsert!` might need to delete data before fetching data from date (in case schedule changes)
 - Cache data from country/network in episodes to avoid joining the tables for filter
 - Filter by network name should not be an exact match only
+- Add rating filter
