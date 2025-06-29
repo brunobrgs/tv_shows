@@ -35,3 +35,6 @@ rspec
 - Schema diagram (ASCII or PNG)
 - Use Redis for cache
 - Create a presenter for the episode Json
+- `Schedule.upsert!` might need to delete data before fetching data from date (in case schedule changes)
+- Cache data from country/network in episodes to avoid joining the tables for filter
+- Filter by network name should not be an exact match only

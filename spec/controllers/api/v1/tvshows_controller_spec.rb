@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::TvshowsController, type: :controller do
   describe 'GET #index' do
-    let!(:show1) { create(:show) }
-    let!(:show2) { create(:show) }
-
+    let!(:country1) { create(:country, code: 'AA') }
+    let!(:network1) { create(:network, name: 'Disney XD', country: country1) }
+    let!(:show1) { create(:show, network: network1) }
     let!(:episode1) do
       create(:episode,
              show: show1,
@@ -16,6 +16,9 @@ RSpec.describe Api::V1::TvshowsController, type: :controller do
       )
     end
 
+    let!(:country2) { create(:country, code: 'BB') }
+    let!(:network2) { create(:network, name: 'ABC', country: country2) }
+    let!(:show2) { create(:show, network: network2) }
     let!(:episode2) do
       create(:episode,
              show: show2,
@@ -64,12 +67,28 @@ RSpec.describe Api::V1::TvshowsController, type: :controller do
                                        )
     end
 
-    context 'with date filters' do
+    context 'with filters' do
       it 'filters episodes by date range' do
         get :index, params: {
           date_from: '2024-01-01',
           date_to: '2024-01-31'
         }
+
+        json_response = JSON.parse(response.body)
+        expect(json_response['episodes'].length).to eq(1)
+        expect(json_response['episodes'].first['name']).to eq('Pilot')
+      end
+
+      it "filters episodes by network name" do
+        get :index, params: { network_name: 'Disney XD' }
+
+        json_response = JSON.parse(response.body)
+        expect(json_response['episodes'].length).to eq(1)
+        expect(json_response['episodes'].first['name']).to eq('Pilot')
+      end
+
+      it "filters by country code" do
+        get :index, params: { country_code: 'AA' }
 
         json_response = JSON.parse(response.body)
         expect(json_response['episodes'].length).to eq(1)

@@ -4,10 +4,7 @@ module Api
       def index
         json_response = Rails.cache.fetch(cache_key, expires_in: 1.hour) do
           episodes = Episode.includes(:show).page(page).per(per_page)
-
-          if params[:date_from].present? && params[:date_to].present?
-            episodes = episodes.by_airstamp(params[:date_from].to_date, params[:date_to].to_date)
-          end
+          episodes = apply_filters(episodes)
 
           {
             episodes: episodes.map { |episode| episode_json(episode) },
@@ -24,11 +21,24 @@ module Api
 
       private
 
+      def apply_filters(episodes)
+        if params[:date_from].present? && params[:date_to].present?
+          episodes = episodes.by_airstamp(params[:date_from].to_date, params[:date_to].to_date)
+        end
+
+        episodes = episodes.by_network_name(params[:network_name]) if params[:network_name].present?
+        episodes = episodes.by_country_code(params[:country_code]) if params[:country_code].present?
+
+        episodes
+      end
+
       def cache_key
         key = Digest::MD5.hexdigest(
           [
             params[:date_from],
             params[:date_to],
+            params[:network_name],
+            params[:country_code],
             page,
             per_page
           ].map(&:to_s).join('-')
